@@ -3,8 +3,8 @@ import AppLayout from "./AppLayout";
 
 export default function App() {
   return (
-    <Router>
-      <AppLayout />
-    </Router>
+      <Router>
+        <AppLayout />
+      </Router>
   );
 }

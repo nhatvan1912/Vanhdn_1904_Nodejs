@@ -1,16 +1,22 @@
-import { Link } from "react-router-dom";
-import BlogPosts from "../BlogPosts";
+import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 export default function PostLists() {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/posts")
+        .then(res => res.json())
+        .then(data => setPosts(data));
+  }, []);
+
   return (
-    <ul>
-      {Object.entries(BlogPosts).map(([slug, { title }]) => (
-        <li key={slug}>
-          <Link to={`/posts/${slug}`}>
-            <h3>{title}</h3>
-          </Link>
-        </li>
-      ))}
-    </ul>
+      <ul>
+        {posts.map(({ slug, title }) => (
+            <li key={slug}>
+              <Link to={`/posts/${slug}`}><h3>{title}</h3></Link>
+            </li>
+        ))}
+      </ul>
   );
 }
